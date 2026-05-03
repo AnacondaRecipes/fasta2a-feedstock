@@ -1,0 +1,56 @@
+{% set name = "fasta2a" %}
+{% set version = "0.6.0" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+source:
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: 8078fad9b9dabf7ee4abb3fcb1ca9e5b43bb55c0262be2425bc48cc69f77e963
+
+build:
+  number: 0
+  script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
+  skip: true  # [py<39]
+
+requirements:
+  host:
+    - python
+    - pip
+    - hatchling
+    - uv-dynamic-versioning >=0.7.0
+  run:
+    - python
+    - opentelemetry-api >=1.28.0
+    - pydantic >=2.10
+    - starlette >0.29.0
+  run_constrained:
+    # logfire extra (upstream pyproject.toml [project.optional-dependencies].logfire)
+    - logfire >=2.3
+
+test:
+  imports:
+    - fasta2a
+  requires:
+    - pip
+  commands:
+    - pip check
+
+about:
+  home: https://github.com/pydantic/fasta2a
+  license: MIT
+  license_family: MIT
+  license_file: LICENSE
+  summary: Convert an AI Agent into an A2A server
+  description: |
+    fasta2a turns an AI Agent into an A2A (Agent-to-Agent protocol) server.
+    Built on Starlette; integrates with pydantic-ai and other agent
+    frameworks. Optional logfire integration for observability.
+  doc_url: https://pydantic.github.io/fasta2a
+  dev_url: https://github.com/pydantic/fasta2a
+
+extra:
+  recipe-maintainers:
+    - moritzwilksch
+    - xkong-anaconda
