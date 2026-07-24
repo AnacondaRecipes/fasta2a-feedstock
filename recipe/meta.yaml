@@ -28,7 +28,11 @@ requirements:
   run_constrained:
     # logfire extra (upstream pyproject.toml [project.optional-dependencies].logfire)
     - logfire >=2.3
+    # pydantic-ai
+    - pydantic-ai-slim >=1.92  # [py>=310]
 
+# No tests run because asgi_lifespan not a part of anaconda main channel.
+# E   ModuleNotFoundError: No module named 'asgi_lifespan'
 test:
   imports:
     - fasta2a
@@ -47,7 +51,7 @@ about:
     fasta2a turns an AI Agent into an A2A (Agent-to-Agent protocol) server.
     Built on Starlette; integrates with pydantic-ai and other agent
     frameworks. Optional logfire integration for observability.
-  doc_url: https://pydantic.github.io/fasta2a
+  doc_url: https://github.com/datalayer/fasta2a/blob/main/README.md
   dev_url: https://github.com/pydantic/fasta2a
 
 extra:
