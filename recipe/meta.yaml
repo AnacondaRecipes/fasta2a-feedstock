@@ -1,8 +1,6 @@
 {% set name = "fasta2a" %}
 {% set version = "2.0.1" %}
 
-# No tests run because asgi_lifespan not a part of anaconda main channel.
-# E   ModuleNotFoundError: No module named 'asgi_lifespan'
 package:
   name: {{ name }}
   version: {{ version }}
@@ -34,6 +32,8 @@ requirements:
     # pydantic-ai
     - pydantic-ai-slim >=2.40.0  # [py>=310]
 
+# No tests run because asgi_lifespan not a part of anaconda main channel.
+# E   ModuleNotFoundError: No module named 'asgi_lifespan'
 test:
   imports:
     - fasta2a
